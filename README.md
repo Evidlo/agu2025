@@ -1,11 +1,10 @@
 # Efficient Uncertainty Quantification for Iterative Tomographic Retrieval
 
 [Poster](poster.pdf)
-
 [Code](nonlinear_fit.py)
 
 Key Ideas:
-- [Delta method][1] is a simple/cheap way to obtain uncertainty estimates in inverse problems $`y=F(x) + \epsilon`$. $`\hat{x} = R(y) = \arg \min_x ||y - F(x)||`$
+- [Delta method][1] is a simple/cheap way to obtain uncertainty estimates in inverse problems $`y=F(x) + \epsilon`$. $`\hat{x} = R(y) = \arg \min_x \|y - F(x)\|`$
 - $`\Sigma_x \approx J_R \Sigma_y J_R^T`$
 - Applicable when:
   - Noise $`\epsilon`$ is additive Gaussian
@@ -15,6 +14,18 @@ Key Ideas:
 [1]: https://arxiv.org/html/2502.14698v1#S1
 [2]: https://implicit-layers-tutorial.org/implicit_functions/
 
+## Uncertainty Quantification of $`\hat{x}`$
+
+Below are numerical experiments of the delta method under different noise conditions (compared against Monte Carlo)
+
+- Monte Carlo - accurate but expensive
+- Delta Method - cheap but requires approximate linearity
+
+|            | Delta Method (w/ IFT)                                  | Monte Carlo                                           | Notes                                              |
+|------------|--------------------------------------------------------|-------------------------------------------------------|----------------------------------------------------|
+| Low Noise  | <img width="300px" src="figures/joint_ift_small.png"/> | <img width="300px" src="figures/joint_mc_small.png"/> | - approximates Monte Carlo UQ well                 |
+| High Noise | <img width="300px" src="figures/joint_ift_large.png"/> | <img width="300px" src="figures/joint_mc_large.png"/> | - unable to capture bimodality of $`P(\hat{X}|Y)`$ |
+|            |                                                        |                                                       |                                              |     |
 
 ## Abstract
 
