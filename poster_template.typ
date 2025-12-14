@@ -15,26 +15,36 @@
     logo-right: none,
     body
 ) = {
+
+    // --- Styles ---
+    show heading: set align(center)
+    // show heading: set text(
+    //     size: 13pt,
+    //     weight: "regular",
+    // )
+    // show heading: smallcaps
+
+
     grid(
-        columns: (25%, 55%, 20%),
+        columns: (30%, 50%, 20%),
         rows: (15%, auto, 1fr),
         column-gutter: 0%,
 
-        // Row 1, Column 1: Diagonal stripes
+        // --- Diagonal Stripes ---
         box(
             {
-                let x = -10%
-                let dx = 22%
+                let x = -25%
+                let dx = 25%
 
                 for (i, col) in (navy, navy, purple, cloud, peach, lpeach).enumerate() {
                     place(
                         top + left,
                         polygon(
                             fill: col,
-                            (x + i*dx + 0%, 0%),
-                            (x + i*dx + dx + 1%, 0%),
-                            (x + i*dx + 1%, 100%),
-                            (x + i*dx + -dx, 100%),
+                            (x + i*dx - 1%, 0%),
+                            (x + i*dx + dx, 0%),
+                            (x + i*dx + 6%, 100%),
+                            (x + i*dx + -dx + 5%, 100%),
                         )
                     )
                 }
@@ -46,6 +56,7 @@
             width: 100%,
             height: 100%,
             fill: lpeach,
+            // stroke: lpeach,
             align(center + horizon)[
                 #text(
                     size: title_size,
@@ -97,7 +108,7 @@
                 width: 100%,
                 height: 100%,
                 // fill: white,
-                inset: 1in,
+                inset: (top: 0.5in, left: 1in, bottom: 1in, right: 1in),
                 {
                     set text(size: 1.3em)
                     body
@@ -106,3 +117,21 @@
         ),
     )
 }
+
+
+// --- Example Usage ---
+//
+//
+// #poster(
+//     title: [Efficient Uncertainty Quantification for\ Iterative Retrieval of Exospheric Density],
+//     title_typeface: "Helvetica",
+//     title_size: 2.6em,
+//     authors: [Evan Widloski and Lara Waldrop — University of Illinois Urbana-Champaign],
+//     logo-left: "nasa.svg",
+//     logo-right: "illinois.svg"
+// )[#columns(3, gutter: 2em)[
+// = Summary
+// - foo
+// - bar
+// = Another Section
+// ]]
