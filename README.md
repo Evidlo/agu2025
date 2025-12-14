@@ -23,9 +23,9 @@ Below are numerical experiments of the delta method under different noise condit
 
 |            | Delta Method (w/ IFT)                                  | Monte Carlo                                           | Notes                                              |
 |------------|--------------------------------------------------------|-------------------------------------------------------|----------------------------------------------------|
-| Low Noise  | <img width="300px" src="figures/joint_ift_small.png"/> | <img width="300px" src="figures/joint_mc_small.png"/> | - approximates Monte Carlo UQ well                 |
-| High Noise | <img width="300px" src="figures/joint_ift_large.png"/> | <img width="300px" src="figures/joint_mc_large.png"/> | - unable to capture bimodality of $`P(\hat{X}|Y)`$ |
-|            |                                                        |                                                       |                                              |     |
+| Low Noise  | <img width="200px" src="figures/joint_ift_small.png"/> | <img width="200px" src="figures/joint_mc_small.png"/> | approximates Monte Carlo UQ well                   |
+| High Noise | <img width="200px" src="figures/joint_ift_large.png"/> | <img width="200px" src="figures/joint_mc_large.png"/> | unable to capture bimodality of $`P(\hat{X}\|Y)`$  |
+|            |                                                        |                                                       |                                                    |
 
 ## Abstract
 
