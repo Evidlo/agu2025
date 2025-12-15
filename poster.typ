@@ -199,7 +199,7 @@ $)
         Assuming
 
         1. Loss $cal(L)$ is twice-differentiable
-        2. We can find $hat(x)$ s.t. $cal(L)(hat(x), y) = 0$
+        2. We can find $hat(x)$ s.t. $nabla_x cal(L)(hat(x), y) = 0$
 
         Then
 
