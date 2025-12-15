@@ -4,9 +4,9 @@
 #
 #  Find best fitting `x`
 #  given
-#       y = a·x + n ∈ ℕ^M
+#       y = F(x) + ε ∈ ℕ^M
 #  where
-#       n ∈ Gaussian(0, Σ),
+#       ε ∈ Gaussian(0, Σ),
 
 import scienceplots
 import matplotlib.pyplot as plt
