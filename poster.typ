@@ -49,8 +49,8 @@
     // title_typeface: "Helvetica",
     title_size: 2.6em,
     authors: [Evan Widloski and Lara Waldrop — University of Illinois Urbana-Champaign],
-    logo-left: "nasa.svg",
-    logo-right: "illinois.svg"
+    logo-left: "figures/nasa.svg",
+    logo-right: "figures/illinois.svg"
 // )[#columns(3, gutter: 2em)[
 )[#grid(columns: (1fr, 1fr, 1fr), column-gutter: 2em, [
 
@@ -63,18 +63,20 @@
 
 = Overview
 
+- Carruthers spacecraft is first dedicated to exosphere
 - Exospheric retrieval is classic tomography problem
-- Motivated by launch of Carruthers spacecraft
-- Tomographic inverse problem \ Given $y=F(x) + epsilon$, \ find $hat(x) = R(y) = arg min_x ||y - F(x)||$
+- Tomographic inverse problem \ Given $y=F(x) + epsilon$, \ find $hat(x) = R(y) = arg min_x ||y - F(x)||$ (iterative)
 
-- Delta method uncertainty quantification (UQ)
-    - Goal: Put error bars around estimate $hat(x)$
-    - i.e.: Gaussian approximation of $P(X|Y)$
+- Delta method uncertainty quantification (UQ) \
+    Goal: Put error bars around estimate $hat(x)$ \
+    i.e.: Gaussian approximation of posterior $P(hat(X)|Y)$ \
+    $Sigma_x = J_R Sigma_y J_R^T$
 
-- Jacobian $J_R$ is needed for many UQ methods
-    - Expensive when $R$ is iterative optimization
+- Jacobian $J_R$ expensive because $R$ is iterative
 
-#hl([New idea: Implicit function theorem (IFT) can approximate $J_R$ efficiently, speeding up UQ])
+#hl([
+New idea: Implicit function theorem (IFT) can approximate $J_R$ efficiently, speeding up UQ
+])
 
 ]))
 
@@ -111,8 +113,9 @@ $)
 
 = Overview of UQ Methods
 
-#set text(size: 22pt)
 
+#[
+#set text(size: 22pt)
 #table(
     columns: 5,
     inset: 0.5em,
@@ -155,34 +158,44 @@ $)
     [*Yes*], [No], [Yes], [Yes],
     // FIXME - verify MCMC speedup w/ IFT
 
-)
+    )
+]
 
-= Delta Method (WIP)
+#set text(size: 26pt)
 
-- Assumes Gaussian Noise
-- Assumes noise small relative to local curvature of $R(y)$
-  $R$ is well-conditioned
+= Delta Method
+
+- Delta method @delta is a simple/cheap way to obtain uncertainty estimates
+    - Linearize retrieval mapping $R$
+    - $Sigma_x approx J_R Sigma_y J_R^T$
+- Applicable when:
+    - Noise $epsilon$ is additive Gaussian
+    - Noise level $Sigma_y$ is "small" relative to curvature of $R(y)$ \
+      ($R$ is well-conditioned)
 
 = Jacobian of Iterative Functions
 
 #grid(columns: (4fr, 1fr), column-gutter: 1em, [
-    - Jacobians of iterative functions hard to compute
+    - Jacobians of iterative functions expensive
         - Recursive nature leads to complex graphs
         - E.g. gradient descent
 
     #math.equation($
-        arg min_x underbrace(||y - F(x)||, "Loss" cal(L)(x, y))
+        hat(x) = arg min_x underbrace(||y - F(x)||, "Loss" cal(L)(x, y))
     $)
 
     #math.equation($
         x_(i+1) ← x_i + eta nabla_x cal(L)(x_i, y)
     $)
 
-    - Graph grows linearly with \# iterations $arrow.r.long$
+    // - Graph grows linearly with \# iterations $arrow.r.long$
 
-    - IFT can save us!
+    // - IFT can save us! @implicit_layers
+
+    #set align(center)
 
     #boxx([
+        #align(center, [*Implicit Function Theorem (IFT)*])
         Assuming
 
         1. Loss $cal(L)$ is twice-differentiable
@@ -202,7 +215,7 @@ $)
     #figure(
         image("figures/torchgraph_iterations.svg"),
         supplement: none,
-        caption: "PyTorch graph grows linearly with # iterations."
+        caption: "PyTorch graph"
     )
 ]
 )
@@ -213,14 +226,14 @@ $)
 
 [
 
-= Numerical Experiments (WIP)
+= Numerical Experiments
 
 #math.equation($
     y = F(x) + epsilon \
     F(x) = -(x - 5)^3 - (x - 5)
 $)
 
-#grid(columns: 3, align: center + horizon, row-gutter: 1em,
+#grid(columns: 3, align: center + horizon, column-gutter:.5em, row-gutter: 1em,
     "", "Monte Carlo", "Delta Method",
     vert("Low Noise"),
     image(width: 100%, "figures/joint_mc_small.png"),
@@ -234,7 +247,7 @@ $)
 
 
 #[
-    #set text(size:20pt)
+    #set text(size:16pt)
     #bibliography("refs.bib", style: "american-physics-society")
 ]
 
